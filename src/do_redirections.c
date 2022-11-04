@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 13:20:59 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/03/17 00:42:53 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/11/04 19:16:51 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static int	spread_words(t_cmd *cmd, int i, t_data *data)
 		return (set_new_rd_out_trunc(split[i + 1], &(cmd->fd_out), data));
 	else if (!ft_memcmp(split[i], "<<", 3))
 	{
-		close_fd(cmd->fd_in);
+		if (cmd->fd_in != cmd->fd_heredocs)
+			close_fd(cmd->fd_in);
 		cmd->fd_in = cmd->fd_heredocs;
 		return (1);
 	}
